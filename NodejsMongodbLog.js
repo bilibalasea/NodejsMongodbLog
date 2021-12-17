@@ -26,4 +26,12 @@ app.get("/input",(req,res)=>{
         res.send(str)
     })
 })
+
+app.get("/login",(req,res)=>{
+    // res.send(req.query)
+    console.log(req.query)
+    ejs.renderFile("login.html",(err,str)=>{
+        res.send(str)
+    })
+})
 app.listen(10706)
