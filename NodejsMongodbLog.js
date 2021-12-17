@@ -14,24 +14,28 @@ const mydata = mongoose.model('cat1s', schema);
 // kitty.save()
 
 app.use('/',express.static('public'))
-app.get("/input",(req,res)=>{
+app.use('/',express.static('views'))
+app.get("/input",(req,res,next)=>{
     // res.send(req.query)
-    console.log(req.query)
-    const kitty = new mydata({ name: req.query.first,health: req.query.second });
-    kitty.save()
+    // console.log(req.query)
+    // const kitty = new mydata({ name: req.query.first,health: req.query.second });
+    // kitty.save()
     // ejs.renderFile(filename, data, options, function(err, str){
     //     // str => 输出渲染后的 HTML 字符串
     // });
     ejs.renderFile("result.html",{returnVal:"seccess"},(err,str)=>{
         res.send(str)
     })
+    next();
 })
 
-app.get("/login",(req,res)=>{
+app.get("/reg",(req,res,next)=>{
     // res.send(req.query)
     console.log(req.query)
-    ejs.renderFile("login.html",(err,str)=>{
-        res.send(str)
+    res.sendFile(--__dirname+"/views/reg.html",(err)=>{
+        if(err)
+            console.log(err)
     })
+    next();
 })
 app.listen(10706)
