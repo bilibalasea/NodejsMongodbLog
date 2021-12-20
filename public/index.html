@@ -6,7 +6,7 @@
     <title>Document</title>
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/bootstrap/login.css">
-    <link rel="icon" href="../public/favicon.ico">
+    <link rel="icon" href="favicon.ico">
 </head>
 
 <body>
@@ -17,6 +17,7 @@
         <form name="login_form" id="login_form" method="post" 
         onsubmit="return validateForm()" action="/login">
             <div class="form-group">
+                <p><%= info %></p>
                 <p>用户名:</p>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus>
             </div>
@@ -31,12 +32,12 @@
                 <label><input type="radio" name="role" value="student" />学生</label>
               </div>
             </div>
-              <!-- <input type="submit" name="submit1" value="登陆"> -->
+              <!-- <input type="submit" name="submit1" value="登录"> -->
             <button type="submit" class="btn btn-success btn-block" id="submit">登录</button>
         </form>
         <div class="reg">
             <!-- <button type="submit" class="btn btn-success btn-block" id="reg" action="/reg" method="get">注册</button> -->
-            <a href="/reg.html">创建账号</a>
+            <a href="views/reg.html">创建账号</a>
         </div>
     </div>
 
