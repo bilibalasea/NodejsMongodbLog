@@ -107,8 +107,9 @@
     <script>
       function validateForm() {
           var x = document.forms["notice_form"]["notice"].value;
-          if(x.toString()===""){
-              alert("请填写公告内容后在发布");
+          var y = document.forms["notice_form"]["editor"].value;
+          if(x.toString()===""||y.toString()===""){
+              alert("请完整填写公告内容后再发布");
               return false;
           }
           else{

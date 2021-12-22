@@ -40,13 +40,13 @@ app.use(express.urlencoded({ extended: false }))
 var loguser="";
 var logpassword="";
 var logrole="";
+//用户登录
 app.post("/login",function(req,res,next){
     loguser=String(req.body.username);
     logpassword=String(req.body.password);
     logrole=String(req.body.role);
     next();
 })
-
 app.use('/login', function (req, res, next){
     userdata.findOne({ username: loguser },  function (err, userdata) {
         if (err) return handleError(err);
@@ -75,7 +75,7 @@ app.use('/login', function (req, res, next){
         }
         else{
             console.log("your password is wrong");
-            ejs.renderFile('public/index.html', {info:"用户名、密码或身份选择错误，请重新登录"},function(err, str){
+            ejs.renderFile('public/views/result.html', {info:"用户名、密码或身份选择错误，请重新登录"},function(err, str){
                 // str => 输出渲染后的 HTML 字符串
                 if(err) {
                     console.log(err)
@@ -90,6 +90,7 @@ app.use('/login', function (req, res, next){
     // next();
 });
 
+//用户注册
 app.post("/reg",(req,res,next)=>{
     console.log(req.body)
     reguser=req.body.username;
@@ -97,7 +98,7 @@ app.post("/reg",(req,res,next)=>{
     regage=parseFloat(req.body.age);
     regsex=req.body.sex;
     regtel=parseFloat(req.body.tel);
-    regdor=req.body.dor;
+    regdor=req.body.dors;
     regroom=req.body.room;
     regrole=req.body.role
     loguser=reguser
@@ -106,7 +107,7 @@ app.post("/reg",(req,res,next)=>{
     userreg.save();
 
     // res.send(req.query)
-    if(regrole=="mannger"){
+    if(regrole=="manager"){
         ejs.renderFile('public/views/manager/home.html', function(err, str){
             // str => 输出渲染后的 HTML 字符串
             if(err){console.log(err)}
@@ -130,7 +131,7 @@ app.post("/reg",(req,res,next)=>{
     next();
 })
 
-//管理员所有寝室信息
+//管理员查看所有寝室信息
 app.use("/allDorInfo",(req,res,next)=>{
     userdata.find({}, function (err, userdata1) {
         ejs.renderFile('public/views/manager/allDorInfo.html', {searchdorinfo:userdata1},function(err, str){
@@ -226,6 +227,7 @@ app.post("/notice",(req,res,next)=>{
    next();
 })
 
+//管理员查看个人信息
 app.use("/perinfo",(req,res,next)=>{
     userdata.findOne({ username: loguser },  function (err, userdata) {
         if (err) return handleError(err);
@@ -324,6 +326,7 @@ app.use("/delete",function(req,res,next){
     }); 
 })
 
+//学生查看个人信息
 app.use("/stuinfo",(req,res,next)=>{
     userdata.findOne({ username: loguser },  function (err, userdata) {
         if (err) return handleError(err);
@@ -339,6 +342,7 @@ app.use("/stuinfo",(req,res,next)=>{
    });
 })
 
+//学生查看住在同一个寝室的人员信息
 app.use("/mydorInfo",(req,res,next)=>{
     userdata.findOne({ username: loguser },  function (err, userdata0){
         if (err) return handleError(err);
@@ -358,6 +362,7 @@ app.use("/mydorInfo",(req,res,next)=>{
     })
 })
 
+//学生查看寝室公告
 app.use("/readnotice",(req,res,next)=>{
     noticedata.find({valid:"有效"}, function (err, noticedata1) {
         if (err) return handleError(err);
@@ -372,17 +377,18 @@ app.use("/readnotice",(req,res,next)=>{
    });
 })
 
-// app.use("/logout",(req,res,next)=>{
-//     logname=""
-//     logpassword=""
-//     logrole=""
-//         ejs.renderFile('public/index.html' ,function(err, str){
-//             // str => 输出渲染后的 HTML 字符串
-//             if(err){console.log(err)}
-//             else{
-//                 res.setHeader('Content-Type', 'text/html');
-//                 res.end(str)
-//             }
-//         })
-// })
+//登出
+app.use("/logout",(req,res,next)=>{
+    logname=""
+    logpassword=""
+    logrole=""
+        ejs.renderFile('public/views/result.html' ,{info:"已登出，请重新输入登录信息"},function(err, str){
+            // str => 输出渲染后的 HTML 字符串
+            if(err){console.log(err)}
+            else{
+                res.setHeader('Content-Type', 'text/html');
+                res.end(str)
+            }
+        })
+})
 app.listen(10706)
