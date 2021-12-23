@@ -72,15 +72,15 @@ node_modules中包括项目安装的各种包；NodejsMongodbLog.js实现了项�
 
 ### 3、开发日记
 
-2021.10.5 ： Test remote
+2021.10.6 ： Test remote
 
-2021.12.8 ： Add a file:index.html
+2021.12.9 ： Add a file:index.html
 
 ​					Install express successfully
 
 ​					install mongoose successfully
 
-2021.12.12 ： mongodb success form web.
+2021.12.13 ： mongodb success form web.
 
 ​					ejs is basically successful
 
@@ -90,10 +90,11 @@ node_modules中包括项目安装的各种包；NodejsMongodbLog.js实现了项�
 
 2021.12.18 ： add some home pages and functions
 
-2021.12.19 ： complete some functions.
+2021.12.20 ： complete some functions.
 
-2021.12.20 ： add some actions about managers and students
+2021.12.21 ： add some actions about managers and students
 
 2021.12.22 ： complete the functions of manager and student
 
 2021.12.23 ： write readme.md
+              update readme.md
